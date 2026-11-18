@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sua Loja Aqui — Site Modelo</title>
+<meta name="description" content="Sua loja de bairro agora também na internet. Veja produtos, horários e fale direto pelo WhatsApp. [Personalize: descrição da sua loja]">
+<meta property="og:title" content="Sua Loja Aqui — Site Modelo">
+<meta property="og:description" content="Sua loja de bairro agora também na internet. Veja produtos, horários e fale direto pelo WhatsApp.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://img.usecurling.com/p/1200/630?q=neighborhood%20store%20front&color=orange">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Skip artifact shell — fixed styles served beside every artifact.
+   Tokens, utilities and components (basecoat 1.0 markup, no CDN); artifacts
+   override --accent for their own identity. */
+:root {
+  color-scheme: light dark;
+  --accent: #2563eb;
+  --accent-contrast: #ffffff;
+  --accent-text: color-mix(in srgb, var(--accent) 72%, #000);
+  --bg: #f8f9fb;
+  --surface: #ffffff;
+  --text: #14171f;
+  --text-muted: #5b6472;
+  --border: rgba(20, 23, 31, 0.10);
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(20, 23, 31, 0.08);
+  --space: 16px;
+  --success: #0a7a35;
+  --danger: #c0262d;
+  --warning: #8a5300;
+}
+/* Theme resolution. Without data-theme the viewer's system preference decides,
+   as it always did. With it, the artifact's own choice wins in BOTH directions:
+   a page that hardcodes one palette must not be handed the opposite set of
+   tokens by the machine it happens to be opened on. The dark values appear
+   twice because a media query cannot be folded into a selector list.
+   The attribute sits inside :where() so these blocks keep the specificity of a
+   bare :root — the page's own <style> is linked after this file and must go on
+   overriding any token it wants, exactly as it could before. */
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+    --bg: #101318;
+    --surface: #181c23;
+    --text: #eef1f6;
+    --text-muted: #9aa4b2;
+    --border: rgba(238, 241, 246, 0.12);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --success: #4ade80;
+    --danger: #f87171;
+    --warning: #fbbf24;
+  }
+}
+:root:where([data-theme="dark"]) {
+  color-scheme: dark;
+  --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+  --bg: #101318;
+  --surface: #181c23;
+  --text: #eef1f6;
+  --text-muted: #9aa4b2;
+  --border: rgba(238, 241, 246, 0.12);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --success: #4ade80;
+  --danger: #f87171;
+  --warning: #fbbf24;
+}
+:root:where([data-theme="light"]) { color-scheme: light; }
+/* Pages generated before the shell had its own components still link the
+   basecoat CDN, which reads its own tokens and switches theme only on a
+   .dark class. Bridged to the shell's, whatever of it those pages use takes
+   the page's accent and follows the declared theme. Its --accent token is a
+   hover tint, renamed in its theme as --color-accent; the shell's --accent is
+   the brand colour, so the tint is derived from it here. */
+:root {
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --popover: var(--surface);
+  --popover-foreground: var(--text);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-contrast);
+  --secondary: color-mix(in srgb, var(--text) 7%, var(--surface));
+  --secondary-foreground: var(--text);
+  --muted: color-mix(in srgb, var(--text) 5%, var(--surface));
+  --muted-foreground: var(--text-muted);
+  --color-accent: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  --color-accent-foreground: var(--text);
+  --destructive: var(--danger);
+  --input: var(--border);
+  --ring: var(--accent);
+}
+* { box-sizing: border-box; }
+/* The reset the pages were written against: they all linked basecoat, which
+   ships Tailwind's. Its components now live here, so the reset does too. */
+*, ::before, ::after, ::backdrop { margin: 0; padding: 0; border: 0 solid; }
+/* Preflight's rule too: without it a component class that sets display
+   (.alert, .card, .btn…) beats the hidden attribute and shows the element. */
+[hidden]:where(:not([hidden="until-found"])) { display: none !important; }
+.hidden { display: none !important; }
+h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+a { color: inherit; text-decoration: inherit; }
+b, strong { font-weight: bolder; }
+ol, ul, menu { list-style: none; }
+svg, video, canvas, iframe { display: block; vertical-align: middle; }
+button, input, select, textarea { color: inherit; background-color: transparent; border-radius: 0; }
+table { border-collapse: collapse; }
+hr { height: 0; color: inherit; border-top-width: 1px; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+
+.shell-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.shell-section { padding: calc(var(--space) * 2) 0; }
+.shell-grid { display: grid; gap: var(--space); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.shell-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: var(--space); }
+.shell-footer { padding: 24px 0 40px; color: var(--text-muted); font-size: 13px; }
+
+.shell-hero { padding: calc(var(--space) * 3) 0 calc(var(--space) * 2); }
+.shell-hero h1 { font-size: clamp(26px, 4vw, 40px); line-height: 1.15; margin: 0 0 10px; text-wrap: balance; }
+.shell-hero p { color: var(--text-muted); max-width: 60ch; margin: 0; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space);
+}
+
+.kpi { display: flex; flex-direction: column; gap: 4px; }
+.kpi .kpi-value { font-size: clamp(22px, 2.3vw, 28px); font-weight: 650; line-height: 1.1; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.kpi .kpi-label { font-size: 13px; color: var(--text-muted); }
+.kpi .kpi-delta { font-size: 12.5px; font-weight: 600; }
+.kpi .kpi-delta.up { color: var(--success); }
+.kpi .kpi-delta.down { color: var(--danger); }
+
+table.shell-table { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.shell-table th {
+  text-align: left; font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 600;
+}
+table.shell-table th, table.shell-table td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--border); }
+table.shell-table td.num, table.shell-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+
+.chart-box { width: 100%; min-height: 220px; }
+.chart-box svg { width: 100%; height: auto; display: block; }
+.chart-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; margin-top: 12px; font-size: 12.5px; color: var(--text-muted); }
+.chart-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.chart-legend i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.chart-legend b { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.muted { color: var(--text-muted); }
+.accent { color: var(--accent-text); }
+.shell-badge, .eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent-text);
+}
+/* A pill keeps its content width inside flex and grid columns, which would
+   otherwise stretch it across the card; a centred parent still centres it. */
+.shell-badge, .eyebrow, .badge { width: fit-content; max-width: 100%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .shell-fade { animation: shell-fade 400ms ease both; }
+  @keyframes shell-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+
+/* Layout and type utilities: what the pages kept spelling in style="".
+   Spacing and type sizes follow Tailwind's scale; there is no Tailwind. */
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.stack { display: flex; flex-direction: column; gap: var(--space); }
+.between { justify-content: space-between; }
+.grow { flex: 1 1 0; min-width: 0; }
+.cols-2, .cols-3, .cols-4, .cols-5 { display: grid; gap: var(--space); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 720px) {
+  .cols-2, .cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cols-5 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) { .cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.gap-1 { gap: 4px; } .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; }
+.m-0 { margin: 0; }
+.mt-1 { margin-top: 4px; } .mt-2 { margin-top: 8px; } .mt-3 { margin-top: 12px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; }
+.mb-1 { margin-bottom: 4px; } .mb-2 { margin-bottom: 8px; } .mb-3 { margin-bottom: 12px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; }
+.p-2 { padding: 8px; } .p-3 { padding: 12px; } .p-4 { padding: 16px; } .p-6 { padding: 24px; }
+.text-xs { font-size: 12px; } .text-sm { font-size: 14px; } .text-base { font-size: 16px; }
+.text-lg { font-size: 18px; } .text-xl { font-size: 20px; line-height: 1.35; }
+.text-2xl { font-size: 24px; line-height: 1.25; } .text-3xl { font-size: 30px; line-height: 1.2; }
+.font-medium { font-weight: 500; } .font-semibold { font-weight: 600; } .font-bold { font-weight: 700; }
+.text-right { text-align: right; } .text-center { text-align: center; }
+.nowrap { white-space: nowrap; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; }
+.w-full { width: 100%; }
+.text-success { color: var(--success); } .text-danger { color: var(--danger); } .text-warning { color: var(--warning); }
+
+/* Components, with basecoat 1.0 markup (variants and sizes are data
+   attributes) and the shell tokens, so a page needs neither component CSS
+   nor a CSS framework. An older page that also links basecoat gets these
+   rules after it, over the same properties. */
+button, input, select, textarea { font: inherit; }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; padding: 0 14px; border: 1px solid transparent; border-radius: calc(var(--radius) - 2px);
+  background: var(--accent); color: var(--accent-contrast);
+  font-size: 14px; font-weight: 500; line-height: 1; white-space: nowrap; text-decoration: none; cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+.btn:hover { background: color-mix(in srgb, var(--accent) 86%, #000); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
+.btn[data-variant="secondary"] { background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--text); }
+.btn[data-variant="secondary"]:hover { background: color-mix(in srgb, var(--text) 14%, var(--surface)); }
+.btn[data-variant="outline"] { background: var(--surface); color: var(--text); border-color: var(--border); }
+.btn[data-variant="ghost"] { background: transparent; color: var(--text); }
+.btn[data-variant="outline"]:hover, .btn[data-variant="ghost"]:hover { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.btn[data-variant="destructive"] { background: var(--danger); color: var(--bg); }
+.btn[data-variant="destructive"]:hover { background: color-mix(in srgb, var(--danger) 86%, var(--text)); }
+.btn[data-variant="link"] { height: auto; padding: 0; background: none; color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+.btn[data-size="sm"] { height: 30px; padding: 0 10px; font-size: 13px; }
+.btn[data-size="lg"] { height: 42px; padding: 0 20px; font-size: 15px; }
+.btn[data-size="icon"] { width: 36px; padding: 0; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px;
+  border: 1px solid transparent; border-radius: 999px; background: var(--accent); color: var(--accent-contrast);
+  font-size: 12px; font-weight: 600; line-height: 1.5; white-space: nowrap;
+}
+.badge[data-variant="secondary"] { background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--text); }
+.badge[data-variant="outline"] { background: transparent; color: var(--text); border-color: var(--border); }
+.badge[data-variant="destructive"] { background: color-mix(in srgb, var(--danger) 14%, var(--surface)); color: var(--danger); }
+
+.alert {
+  display: grid; gap: 4px; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); font-size: 14px;
+}
+.alert h2, .alert h3 { margin: 0; font-size: 14px; font-weight: 600; }
+.alert p, .alert section { margin: 0; color: var(--text-muted); }
+.alert[data-variant="destructive"] { border-color: color-mix(in srgb, var(--danger) 45%, var(--border)); background: color-mix(in srgb, var(--danger) 7%, var(--surface)); color: var(--danger); }
+
+.card {
+  display: flex; flex-direction: column; gap: 16px; padding: 20px 0;
+  border: 1px solid var(--border); border-radius: calc(var(--radius) + 2px);
+  background: var(--surface); color: var(--text); box-shadow: var(--shadow);
+}
+.card > header, .card > section, .card > footer { padding: 0 20px; }
+.card > header { display: grid; gap: 4px; }
+.card > header h2, .card > header h3 { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.3; }
+.card > header p { margin: 0; color: var(--text-muted); font-size: 14px; }
+.card > footer { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+.input {
+  width: 100%; min-height: 36px; padding: 6px 12px; border: 1px solid var(--border); border-radius: calc(var(--radius) - 2px);
+  background: var(--surface); color: var(--text); font-size: 14px;
+}
+textarea.input { min-height: 84px; resize: vertical; }
+.input::placeholder { color: var(--text-muted); }
+.input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+.field { display: grid; gap: 6px; }
+.field label { font-size: 14px; font-weight: 500; }
+.field [role="alert"] { color: var(--danger); font-size: 13px; }
+
+dialog.dialog {
+  width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); margin: auto; padding: 0;
+  border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px);
+  background: var(--surface); color: var(--text); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+dialog.dialog::backdrop { background: rgba(0, 0, 0, 0.5); }
+dialog.dialog > div { display: grid; gap: 16px; padding: 24px; }
+dialog.dialog header { display: grid; gap: 4px; }
+dialog.dialog header h2 { margin: 0; font-size: 18px; font-weight: 600; }
+dialog.dialog header p { margin: 0; color: var(--text-muted); font-size: 14px; }
+dialog.dialog footer { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+
+.tabs { display: grid; gap: 12px; }
+.tabs > [role="tablist"] {
+  display: inline-flex; gap: 4px; width: fit-content; max-width: 100%; padding: 4px; overflow-x: auto;
+  border-radius: var(--radius); background: color-mix(in srgb, var(--text) 6%, var(--surface));
+}
+.tabs [role="tab"] {
+  padding: 6px 12px; border: 0; border-radius: calc(var(--radius) - 4px); background: transparent;
+  color: var(--text-muted); font-size: 14px; font-weight: 500; white-space: nowrap; cursor: pointer;
+}
+.tabs [role="tab"][aria-selected="true"] { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+.tabs [role="tabpanel"][hidden] { display: none; }
+
+.accordion > details { border-bottom: 1px solid var(--border); }
+.accordion > details > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 0; font-weight: 500; list-style: none; cursor: pointer;
+}
+.accordion > details > summary::-webkit-details-marker { display: none; }
+.accordion > details > summary::after { content: "+"; color: var(--text-muted); font-size: 18px; line-height: 1; }
+.accordion > details[open] > summary::after { content: "\2212"; }
+.accordion > details > :not(summary) { margin: 0 0 14px; color: var(--text-muted); }
+
+.toaster {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50; display: flex; flex-direction: column-reverse; gap: 8px;
+  width: min(360px, calc(100vw - 32px)); pointer-events: none;
+}
+.toaster .toast { pointer-events: auto; transition: opacity 200ms ease, transform 200ms ease; }
+.toaster .toast[aria-hidden="true"] { opacity: 0; transform: translateY(8px); }
+.toaster .toast-content {
+  padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); font-size: 13px;
+}
+.toaster .toast-content h2 { margin: 0 0 2px; font-size: 14px; font-weight: 600; }
+.toaster .toast-content p { margin: 0; color: var(--text-muted); }
+
+/* skipUI building blocks. */
+.skip-table-search { max-width: 320px; margin-bottom: 12px; }
+.skip-table-wrap { overflow-x: auto; }
+table.shell-table th[data-sort] { cursor: pointer; user-select: none; }
+table.shell-table th[aria-sort="ascending"]::after { content: " \25B2"; font-size: 9px; }
+table.shell-table th[aria-sort="descending"]::after { content: " \25BC"; font-size: 9px; }
+table.shell-table td.skip-table-empty { color: var(--text-muted); text-align: center; padding: 24px 0; }
+.skip-pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; font-size: 13px; color: var(--text-muted); }
+.toaster .toast[data-type="success"] .toast-content { border-left: 3px solid var(--success); }
+.toaster .toast[data-type="error"] .toast-content { border-left: 3px solid var(--danger); }
+
+</style>
+<script>
+/* Skip artifact shell — fixed helpers served beside every artifact. */
+(function () {
+  "use strict";
+
+  var fmt = {
+    num: function (v, opts) { return new Intl.NumberFormat("pt-BR", opts || {}).format(v); },
+    brl: function (v) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v); },
+    pct: function (v) { return new Intl.NumberFormat("pt-BR", { style: "percent", maximumFractionDigits: 1 }).format(v); },
+    compact: function (v) { return new Intl.NumberFormat("pt-BR", { notation: "compact", maximumFractionDigits: 1 }).format(v); },
+    brlCompact: function (v) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", notation: "compact", maximumFractionDigits: 1 }).format(v); }
+  };
+
+  // axisLabels formats the five y-axis ticks in the unit the chart declared
+  // (percent, BRL or plain numbers), compact so long values never clip, with
+  // the fewest decimals that still print every tick exactly (1,5 mi, not 2 mi).
+  function axisLabels(format, ticks) {
+    function at(digits) {
+      var opts = { notation: "compact", maximumFractionDigits: digits };
+      if (format === "pct") opts = { style: "percent", maximumFractionDigits: digits };
+      else if (format === "brl") opts = { style: "currency", currency: "BRL", notation: "compact", maximumFractionDigits: digits };
+      var nf = new Intl.NumberFormat("pt-BR", opts);
+      return ticks.map(function (t) { return nf.format(t); });
+    }
+    for (var digits = 0; digits < 2; digits++) {
+      if (at(digits).join("|") === at(digits + 1).join("|")) return at(digits);
+    }
+    return at(2);
+  }
+
+  // yAxisPad formats the ticks and measures the left padding they need from
+  // the longest one; drawYAxis then draws the grid and the labels.
+  function yAxisPad(format, max) {
+    var labels = axisLabels(format, [0, max / 4, max / 2, (max * 3) / 4, max]);
+    var longest = labels.reduce(function (m, l) { return Math.max(m, l.length); }, 0);
+    return { labels: labels, padL: Math.max(40, Math.round(longest * 6.2) + 14) };
+  }
+  function drawYAxis(svg, axis, W, padR, padT, plotH) {
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: axis.padL, y1: gy, x2: W - padR, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: axis.padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axis.labels[g];
+      svg.appendChild(lbl);
+    }
+  }
+
+  // xLabelStep: show every k-th category label so labels never overlap, and
+  // always the last one (counted back from the end).
+  function xLabelStep(labels, step) {
+    var longest = labels.reduce(function (m, l) { return Math.max(m, String(l).length); }, 0);
+    return Math.max(1, Math.ceil((longest * 6.4 + 8) / Math.max(step, 1)));
+  }
+  function drawXLabel(svg, text, x, y, W, edgeGuard) {
+    var anchor = "middle";
+    var half = String(text).length * 3.2;
+    if (edgeGuard && x - half < 4) anchor = "start";
+    if (edgeGuard && x + half > W - 4) anchor = "end";
+    var tx = svgEl("text", { x: x, y: y, "text-anchor": anchor, "font-size": 11, fill: mutedColor() });
+    tx.textContent = text;
+    svg.appendChild(tx);
+  }
+  // categoryLines fits a bar's category name in its slot: one line, two lines
+  // split at a space, or cut with "…". A bar without its name can't be read, so
+  // categories are never skipped; null when the slot is too narrow for that.
+  function categoryLines(text, slot) {
+    var fit = Math.floor((slot - 6) / 6.4);
+    var s = String(text);
+    if (fit < 4) return null;
+    if (s.length <= fit) return [s];
+    var cut = function (t) { return t.length <= fit ? t : t.slice(0, fit - 1).trimEnd() + "…"; };
+    var best = -1;
+    for (var i = 0; i < s.length; i++) {
+      if (s[i] === " " && (best < 0 || Math.abs(s.length / 2 - i) < Math.abs(s.length / 2 - best))) best = i;
+    }
+    if (best < 0) return [cut(s)];
+    return [cut(s.slice(0, best)), cut(s.slice(best + 1))];
+  }
+  function legend(el, items) {
+    var box = document.createElement("div");
+    box.className = "chart-legend";
+    items.forEach(function (it) {
+      var row = document.createElement("span");
+      var dot = document.createElement("i");
+      dot.style.background = it.color;
+      row.appendChild(dot);
+      row.appendChild(document.createTextNode((it.label || "") + (it.value ? " " : "")));
+      if (it.value) {
+        var v = document.createElement("b");
+        v.textContent = it.value;
+        row.appendChild(v);
+      }
+      box.appendChild(row);
+    });
+    resolve(el).appendChild(box);
+  }
+  var seriesPalette = ["#1baf7a", "#eda100", "#e34948", "#4a3aa7", "#e87ba4", "#0ea5b7"];
+
+  // format accepts a function OR one of the fmt names ("num" | "brl" | "pct").
+  // A page's function may return nothing or throw: the chart prints its
+  // number instead of taking the rest of the page script down with it.
+  function coerceFormat(spec) {
+    if (typeof spec === "function") {
+      return function (v) {
+        try {
+          var out = spec(v);
+          return out == null ? "" : String(out);
+        } catch (e) {
+          return fmt.num(v);
+        }
+      };
+    }
+    if (typeof spec === "string" && fmt[spec]) return fmt[spec];
+    return function (v) { return fmt.num(v); };
+  }
+
+  function accent() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#2563eb";
+  }
+  function mutedColor() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--text-muted").trim() || "#5b6472";
+  }
+  function svgEl(tag, attrs) {
+    var el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+  function frame(el, w, h) {
+    var svg = svgEl("svg", { viewBox: "0 0 " + w + " " + h, role: "img" });
+    el = resolve(el);
+    el.innerHTML = "";
+    el.appendChild(svg);
+    return svg;
+  }
+
+  // maxOf guards the axis scale: empty values would give -Infinity (truthy,
+  // so "|| 1" can't catch it) and a non-positive max would flip the chart.
+  // finite reads a chart value as a number, 0 when it is not one (NaN,
+  // Infinity, a stray string), so one bad value cannot blank the axis.
+  function finite(v) {
+    var n = +v;
+    return isFinite(n) ? n : 0;
+  }
+
+  function maxOf(values) {
+    var m = values.length ? Math.max.apply(null, values.map(finite)) : 0;
+    return m > 0 ? m : 1;
+  }
+
+  // labelsFor pads or trims the category names to the n points drawn: pages
+  // pass labels and values of different lengths, and one throw here loses
+  // every section the page renders after the chart.
+  function labelsFor(cfg, n) {
+    var out = [];
+    for (var i = 0; i < n; i++) out.push(cfg.labels && cfg.labels[i] != null ? String(cfg.labels[i]) : "");
+    return out;
+  }
+
+  // niceMax rounds the scale up so the four grid steps land on round values
+  // (1, 1.5, 2, 2.5, 3, 4, 5, 6 or 8 × 10^k) and the tick labels read exactly.
+  function niceMax(max) {
+    var raw = max / 4;
+    var mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    var res = raw / mag;
+    var steps = [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10];
+    var nice = steps.filter(function (s) { return s >= res - 1e-9; })[0];
+    return nice * mag * 4;
+  }
+
+  // bar(el, {labels:[], values:[], color?, format?}) — vertical bar chart.
+  function bar(el, cfg) {
+    var W = 640, H = 280, padB = 30, padT = 12, padR = 12;
+    var max = niceMax(maxOf(cfg.values));
+    var axis = yAxisPad(cfg.format, max);
+    var svg = frame(el, W, H);
+    var n = cfg.values.length;
+    var labels = labelsFor(cfg, n);
+    var plotW = W - axis.padL - padR;
+    var step = plotW / n, bw = Math.min(step * 0.62, 64);
+    var names = labels.map(function (l) { return categoryLines(l, step); });
+    var named = names.every(Boolean);
+    if (named && names.some(function (l) { return l.length > 1; })) padB = 42;
+    var plotH = H - padT - padB;
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    var every = xLabelStep(labels, step);
+    drawYAxis(svg, axis, W, padR, padT, plotH);
+    cfg.values.forEach(function (v, i) {
+      var bh = Math.max(0, (finite(v) / max) * plotH);
+      var x = axis.padL + i * step + (step - bw) / 2;
+      var y = padT + plotH - bh;
+      var r = svgEl("rect", { x: x, y: y, width: bw, height: bh, rx: 4, fill: (cfg.colors && cfg.colors[i]) || color });
+      var t = svgEl("title", {});
+      t.textContent = labels[i] + ": " + f(v);
+      r.appendChild(t);
+      svg.appendChild(r);
+      if (named) {
+        names[i].forEach(function (text, li) {
+          drawXLabel(svg, text, x + bw / 2, padT + plotH + 18 + li * 13, W, false);
+        });
+      } else if ((n - 1 - i) % every === 0) {
+        drawXLabel(svg, labels[i], x + bw / 2, H - 10, W, false);
+      }
+    });
+  }
+
+  // line(el, {labels:[], values:[] | series:[{label, values, color?}], color?, format?})
+  // — one line, or several series on one scale with a legend under the chart.
+  function line(el, cfg) {
+    var W = 640, H = 280, padB = 30, padT = 12, padR = 16;
+    var series = cfg.series && cfg.series.length
+      ? cfg.series
+      : [{ label: "", values: cfg.values || [], color: cfg.color }];
+    var all = [];
+    series.forEach(function (s) { all = all.concat(s.values || []); });
+    var max = niceMax(maxOf(all));
+    var axis = yAxisPad(cfg.format, max);
+    var svg = frame(el, W, H);
+    var n = series.reduce(function (m, s) { return Math.max(m, (s.values || []).length); }, 0);
+    var labels = labelsFor(cfg, n);
+    var plotW = W - axis.padL - padR, plotH = H - padT - padB;
+    var f = coerceFormat(cfg.format);
+    drawYAxis(svg, axis, W, padR, padT, plotH);
+    var xs = labels.map(function (_, i) { return axis.padL + (n === 1 ? plotW / 2 : (plotW * i) / (n - 1)); });
+    var every = xLabelStep(labels, n > 1 ? plotW / (n - 1) : plotW);
+    labels.forEach(function (label, i) {
+      if ((n - 1 - i) % every === 0) drawXLabel(svg, label, xs[i], H - 10, W, true);
+    });
+    var colors = series.map(function (s, si) {
+      return s.color || (si === 0 ? (cfg.color || accent()) : seriesPalette[(si - 1) % seriesPalette.length]);
+    });
+    series.forEach(function (s, si) {
+      var color = colors[si];
+      var pts = (s.values || []).map(function (v, i) { return [xs[i], padT + plotH - (finite(v) / max) * plotH]; });
+      var d = pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ");
+      svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: color, "stroke-width": 2, "stroke-linejoin": "round" }));
+      pts.forEach(function (p, i) {
+        var c = svgEl("circle", { cx: p[0], cy: p[1], r: 3.5, fill: color });
+        var t = svgEl("title", {});
+        t.textContent = (s.label ? s.label + " · " : "") + labels[i] + ": " + f(s.values[i]);
+        c.appendChild(t);
+        svg.appendChild(c);
+      });
+    });
+    if (series.length > 1) {
+      legend(el, series.map(function (s, si) { return { label: s.label, color: colors[si] }; }));
+    }
+  }
+
+  // donut(el, {labels:[], values:[], colors?, format?, center?, centerLabel?, legend?})
+  // — donut with a short total in the centre (compact, in the declared unit)
+  // and, with legend: true, the labels and shares listed under it.
+  function donut(el, cfg) {
+    var W = 320, H = 280, cx = W / 2, cy = H / 2, R = 92, r = 58;
+    var svg = frame(el, W, H);
+    // At 100% of a wide container the donut outgrows the height pages give
+    // the box and spills over the next section: keep it at its own size.
+    svg.style.maxWidth = W + "px";
+    svg.style.margin = "0 auto";
+    var values = cfg.values.map(finite);
+    var labels = labelsFor(cfg, values.length);
+    var sum = values.reduce(function (a, b) { return a + b; }, 0);
+    var total = sum || 1;
+    var palette = cfg.colors || [accent()].concat(seriesPalette);
+    // The hover keeps the full value; the centre has room for a short one.
+    var full = coerceFormat(cfg.format);
+    var short = typeof cfg.format === "function" ? full : cfg.format === "brl" ? fmt.brlCompact : fmt.compact;
+    var a0 = -Math.PI / 2;
+    values.forEach(function (v, i) {
+      var a1 = a0 + (v / total) * Math.PI * 2;
+      var large = a1 - a0 > Math.PI ? 1 : 0;
+      var p = ["M", cx + R * Math.cos(a0), cy + R * Math.sin(a0),
+        "A", R, R, 0, large, 1, cx + R * Math.cos(a1), cy + R * Math.sin(a1),
+        "L", cx + r * Math.cos(a1), cy + r * Math.sin(a1),
+        "A", r, r, 0, large, 0, cx + r * Math.cos(a0), cy + r * Math.sin(a0), "Z"].join(" ");
+      var path = svgEl("path", { d: p, fill: palette[i % palette.length] });
+      var t = svgEl("title", {});
+      t.textContent = labels[i] + ": " + full(v) + " (" + fmt.pct(v / total) + ")";
+      path.appendChild(t);
+      svg.appendChild(path);
+      a0 = a1;
+    });
+    // A share chart has no total worth printing: without its own centre text
+    // the caption alone takes the middle.
+    var text = cfg.center != null ? String(cfg.center) : (cfg.format === "pct" ? "" : short(sum));
+    if (text) {
+      var size = text.length > 9 ? 14 : text.length > 7 ? 17 : 20;
+      var center = svgEl("text", { x: cx, y: cfg.centerLabel ? cy + 1 : cy + 6, "text-anchor": "middle", "font-size": size, "font-weight": 650, fill: "currentColor" });
+      center.textContent = text;
+      svg.appendChild(center);
+    }
+    if (cfg.centerLabel) {
+      var cap = svgEl("text", { x: cx, y: text ? cy + 19 : cy + 5, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      cap.textContent = cfg.centerLabel;
+      svg.appendChild(cap);
+    }
+    if (cfg.legend) {
+      legend(el, labels.map(function (label, i) {
+        return { label: label, color: palette[i % palette.length], value: fmt.pct(values[i] / total) };
+      }));
+    }
+  }
+
+  // ---- Page building blocks: what dashboards and small systems kept
+  // re-implementing — a searchable sortable table, a KPI row, tabs, toasts,
+  // dialogs, saved state and mock data. Every call is opt-in, so a page that
+  // brings its own versions keeps them.
+
+  function resolve(target) {
+    return typeof target === "string" ? document.querySelector(target) : target;
+  }
+
+  function node(tag, className, text) {
+    var el = document.createElement(tag);
+    if (className) el.className = className;
+    if (text != null) el.textContent = text;
+    return el;
+  }
+
+  function isNumberColumn(col) {
+    return col.align === "right" || col.format === "num" || col.format === "brl" || col.format === "pct";
+  }
+
+  function cellText(col, row) {
+    var value = row[col.key];
+    if (value == null) return "";
+    return col.format ? coerceFormat(col.format)(value) : String(value);
+  }
+
+  function compareValues(a, b) {
+    if (typeof a === "number" && typeof b === "number") return a - b;
+    return String(a == null ? "" : a).localeCompare(String(b == null ? "" : b), "pt-BR", { numeric: true });
+  }
+
+  // table(el, {columns, rows, search?, pageSize?, empty?, onRowClick?}) — a
+  // table.shell-table with sortable headers, an optional search box and
+  // pager. A column is {key, label, format?, align?, sortable? (true),
+  // render?(value, row) returning a Node or an HTML string — the page writes
+  // its cell templates as markup}. Plain values are always set as text.
+  // Returns {setRows, rows}.
+  function table(target, cfg) {
+    var root = resolve(target);
+    var cols = cfg.columns || [];
+    var pageSize = cfg.pageSize || 0;
+    var state = { rows: (cfg.rows || []).slice(), query: "", key: null, dir: 1, page: 0 };
+    root.innerHTML = "";
+    if (cfg.search) {
+      var search = node("input", "input skip-table-search");
+      search.type = "search";
+      search.placeholder = typeof cfg.search === "string" ? cfg.search : "Buscar…";
+      search.setAttribute("aria-label", search.placeholder);
+      search.addEventListener("input", function () {
+        state.query = search.value.trim().toLowerCase();
+        state.page = 0;
+        draw();
+      });
+      root.appendChild(search);
+    }
+    var tableEl = node("table", "shell-table");
+    var headRow = node("tr");
+    var heads = cols.map(function (col) {
+      var th = node("th", isNumberColumn(col) ? "num" : "", col.label == null ? col.key : col.label);
+      th.scope = "col";
+      if (col.sortable !== false) {
+        var toggle = function () {
+          state.dir = state.key === col.key ? -state.dir : 1;
+          state.key = col.key;
+          draw();
+        };
+        th.setAttribute("data-sort", col.key);
+        th.tabIndex = 0;
+        th.addEventListener("click", toggle);
+        th.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+        });
+      }
+      headRow.appendChild(th);
+      return th;
+    });
+    var thead = node("thead");
+    var tbody = node("tbody");
+    var wrap = node("div", "skip-table-wrap");
+    var pager = node("div", "skip-pager");
+    thead.appendChild(headRow);
+    tableEl.appendChild(thead);
+    tableEl.appendChild(tbody);
+    wrap.appendChild(tableEl);
+    root.appendChild(wrap);
+    if (pageSize) root.appendChild(pager);
+
+    function visibleRows() {
+      var rows = state.rows;
+      if (state.query) {
+        rows = rows.filter(function (row) {
+          return cols.some(function (col) { return cellText(col, row).toLowerCase().indexOf(state.query) >= 0; });
+        });
+      }
+      if (state.key) {
+        var key = state.key, dir = state.dir;
+        rows = rows.slice().sort(function (a, b) { return dir * compareValues(a[key], b[key]); });
+      }
+      return rows;
+    }
+
+    function drawRow(row) {
+      var tr = node("tr");
+      cols.forEach(function (col) {
+        var td = node("td", isNumberColumn(col) ? "num" : "");
+        if (!col.render) {
+          td.textContent = cellText(col, row);
+        } else {
+          var content = col.render(row[col.key], row);
+          if (content instanceof Node) td.appendChild(content);
+          else td.innerHTML = content == null ? "" : String(content);
+        }
+        tr.appendChild(td);
+      });
+      // The row stays a row (no role) and takes focus, so a keyboard reaches
+      // the same action; keys pressed on a control inside a cell are its own.
+      if (cfg.onRowClick) {
+        tr.style.cursor = "pointer";
+        tr.tabIndex = 0;
+        tr.addEventListener("click", function () { cfg.onRowClick(row); });
+        tr.addEventListener("keydown", function (e) {
+          if (e.target !== tr || (e.key !== "Enter" && e.key !== " ")) return;
+          e.preventDefault();
+          cfg.onRowClick(row);
+        });
+      }
+      return tr;
+    }
+
+    function pagerButton(label, disabled, step) {
+      var button = node("button", "btn", label);
+      button.type = "button";
+      button.setAttribute("data-variant", "outline");
+      button.setAttribute("data-size", "sm");
+      button.disabled = disabled;
+      button.addEventListener("click", function () { state.page += step; draw(); });
+      return button;
+    }
+
+    function draw() {
+      var rows = visibleRows();
+      heads.forEach(function (th, i) {
+        if (cols[i].key === state.key) th.setAttribute("aria-sort", state.dir > 0 ? "ascending" : "descending");
+        else th.removeAttribute("aria-sort");
+      });
+      var pages = pageSize ? Math.max(1, Math.ceil(rows.length / pageSize)) : 1;
+      state.page = Math.min(state.page, pages - 1);
+      var shown = pageSize ? rows.slice(state.page * pageSize, (state.page + 1) * pageSize) : rows;
+      tbody.innerHTML = "";
+      if (!shown.length) {
+        var empty = node("td", "skip-table-empty", cfg.empty || "Nenhum registro encontrado.");
+        empty.colSpan = cols.length;
+        tbody.appendChild(node("tr")).appendChild(empty);
+      }
+      shown.forEach(function (row) { tbody.appendChild(drawRow(row)); });
+      if (!pageSize) return;
+      pager.innerHTML = "";
+      var from = rows.length ? state.page * pageSize + 1 : 0;
+      pager.appendChild(node("span", "", from + "–" + Math.min(rows.length, (state.page + 1) * pageSize) + " de " + rows.length));
+      var nav = node("div", "row gap-2");
+      nav.appendChild(pagerButton("Anterior", state.page === 0, -1));
+      nav.appendChild(pagerButton("Próxima", state.page >= pages - 1, 1));
+      pager.appendChild(nav);
+    }
+
+    draw();
+    return {
+      setRows: function (rows) { state.rows = rows.slice(); draw(); },
+      rows: visibleRows
+    };
+  }
+
+  // kpis(el, [{label, value, format?, delta?, hint?}]) — KPI cards in a
+  // responsive grid; delta is a fraction (0.12 renders as ▲ 12%).
+  function kpis(target, items) {
+    var root = resolve(target);
+    root.innerHTML = "";
+    root.classList.add("shell-grid");
+    items.forEach(function (item) {
+      var card = node("div", "panel kpi");
+      card.appendChild(node("span", "kpi-label", item.label));
+      // Large money values go compact ("R$ 27,5 mi"): the full amount does
+      // not fit a KPI card at four per row.
+      var kpiFormat = item.format === "brl" && Math.abs(item.value) >= 1e6 ? fmt.brlCompact : (item.format ? coerceFormat(item.format) : null);
+      card.appendChild(node("span", "kpi-value", kpiFormat ? kpiFormat(item.value) : String(item.value)));
+      if (typeof item.delta === "number") {
+        var up = item.delta >= 0;
+        card.appendChild(node("span", "kpi-delta " + (up ? "up" : "down"), (up ? "▲ " : "▼ ") + fmt.pct(Math.abs(item.delta))));
+      }
+      if (item.hint) card.appendChild(node("span", "kpi-label", item.hint));
+      root.appendChild(card);
+    });
+  }
+
+  // badge(text, variant?) — a .badge node for table cells and lists;
+  // variant is "secondary" | "outline" | "destructive" (default: primary).
+  function badge(text, variant) {
+    var el = node("span", "badge", text);
+    if (variant) el.setAttribute("data-variant", variant);
+    return el;
+  }
+
+  // tabs(el) — wires one .tabs block: [role=tab] buttons inside
+  // [role=tablist], each with aria-controls naming its [role=tabpanel].
+  function tabs(target) {
+    var root = resolve(target);
+    var buttons = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+    function select(chosen) {
+      buttons.forEach(function (b) {
+        var on = b === chosen;
+        b.setAttribute("aria-selected", on ? "true" : "false");
+        b.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(b.getAttribute("aria-controls"));
+        if (panel) panel.hidden = !on;
+      });
+    }
+    buttons.forEach(function (b, i) {
+      b.addEventListener("click", function () { select(b); });
+      b.addEventListener("keydown", function (e) {
+        var step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!step) return;
+        var next = buttons[(i + step + buttons.length) % buttons.length];
+        next.focus();
+        select(next);
+      });
+    });
+    select(buttons.filter(function (b) { return b.getAttribute("aria-selected") === "true"; })[0] || buttons[0]);
+  }
+
+  // toast(message, {type?: "success" | "error", title?, duration?}) — a
+  // .toast in a shared .toaster at the bottom of the page.
+  function toast(message, opts) {
+    opts = opts || {};
+    var toaster = document.querySelector(".toaster") || document.body.appendChild(node("div", "toaster"));
+    var item = node("div", "toast");
+    item.setAttribute("role", opts.type === "error" ? "alert" : "status");
+    item.setAttribute("aria-hidden", "true");
+    if (opts.type) item.setAttribute("data-type", opts.type);
+    var content = node("div", "toast-content");
+    var section = node("section");
+    if (opts.title) section.appendChild(node("h2", "", opts.title));
+    section.appendChild(node("p", "", message));
+    content.appendChild(section);
+    item.appendChild(content);
+    toaster.appendChild(item);
+    requestAnimationFrame(function () { item.setAttribute("aria-hidden", "false"); });
+    setTimeout(function () {
+      item.setAttribute("aria-hidden", "true");
+      setTimeout(function () { item.remove(); }, 400);
+    }, opts.duration || 3000);
+  }
+
+  // Dialogs are native <dialog class="dialog">: a [data-dialog-open="id"]
+  // anywhere opens one, a [data-dialog-close] inside closes it, and a click on
+  // its backdrop closes it too. Plain dialog.showModal()/close() still work.
+  document.addEventListener("click", function (e) {
+    var target = e.target;
+    if (!(target instanceof Element)) return;
+    var opener = target.closest("[data-dialog-open]");
+    if (opener) {
+      var dialog = document.getElementById(opener.getAttribute("data-dialog-open"));
+      if (dialog && dialog.showModal && !dialog.open) dialog.showModal();
+      return;
+    }
+    var closer = target.closest("[data-dialog-close]");
+    if (closer && closer.closest("dialog")) {
+      closer.closest("dialog").close();
+      return;
+    }
+    if (target.tagName === "DIALOG" && target.classList.contains("dialog") && target.open) target.close();
+  });
+
+  // store(key, fallback) — JSON state in localStorage that never throws (a
+  // private window or a full quota falls back to memory): {get, set, update}.
+  function store(key, fallback) {
+    var memory;
+    // Set while the last write did not reach localStorage: what is stored
+    // there is older than memory until a write goes through again.
+    var unsaved = false;
+    var initial = function () { return fallback === undefined ? undefined : JSON.parse(JSON.stringify(fallback)); };
+    function get() {
+      if (!unsaved) {
+        try {
+          var raw = localStorage.getItem(key);
+          if (raw != null) return JSON.parse(raw);
+        } catch (e) { /* storage unavailable: memory below */ }
+      }
+      return memory !== undefined ? memory : initial();
+    }
+    function set(value) {
+      memory = value;
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+        unsaved = false;
+      } catch (e) {
+        unsaved = true;
+      }
+      return value;
+    }
+    return { get: get, set: set, update: function (fn) { return set(fn(get())); } };
+  }
+
+  // mock — seeded random data, so a page asks for 90 days of numbers in one
+  // line instead of writing them out; the same seed gives the same data.
+  var FIRST = ["Ana", "Bruno", "Carla", "Diego", "Eduarda", "Felipe", "Gabriela", "Henrique", "Isabela", "João",
+    "Larissa", "Marcos", "Natália", "Otávio", "Paula", "Rafael", "Sofia", "Thiago", "Vanessa", "Lucas"];
+  var LAST = ["Silva", "Santos", "Oliveira", "Souza", "Pereira", "Costa", "Rodrigues", "Almeida", "Nascimento", "Lima",
+    "Araújo", "Fernandes", "Carvalho", "Gomes", "Martins", "Rocha", "Ribeiro", "Barbosa"];
+  var INITIALS = "ABCDEFGHIJLMNOPRSTV".split("");
+  var CITIES = ["São Paulo, SP", "Rio de Janeiro, RJ", "Belo Horizonte, MG", "Curitiba, PR", "Porto Alegre, RS",
+    "Salvador, BA", "Recife, PE", "Fortaleza, CE", "Brasília, DF", "Goiânia, GO", "Campinas, SP", "Florianópolis, SC",
+    "Manaus, AM", "Belém, PA", "Vitória, ES", "Natal, RN"];
+
+  function createMock(seed) {
+    var state = seed >>> 0;
+    var names = 0;
+    function random() {
+      state = (state + 0x6d2b79f5) >>> 0;
+      var t = state;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    function int(min, max) { return min + Math.floor(random() * (max - min + 1)); }
+    function pick(list) { return list[Math.floor(random() * list.length)]; }
+    var mock = {
+      seed: function (value) { state = value >>> 0; names = 0; return mock; },
+      random: random,
+      int: int,
+      float: function (min, max, decimals) {
+        var factor = Math.pow(10, decimals == null ? 2 : decimals);
+        return Math.round((min + random() * (max - min)) * factor) / factor;
+      },
+      pick: pick,
+      chance: function (p) { return random() < p; },
+      // There are 360 first/last pairs. A page that draws until the name is
+      // new (do { … } while (used.has(name))) froze the tab past them, so
+      // later draws widen the space: a second surname after 200 (6,480), a
+      // middle initial after 4,000.
+      name: function () {
+        names++;
+        var middle = names > 4000 ? pick(INITIALS) + ". " : "";
+        return pick(FIRST) + " " + middle + (names > 200 ? pick(LAST) + " " : "") + pick(LAST);
+      },
+      city: function () { return pick(CITIES); },
+      // series(n, {start, trend, noise, min, decimals}) — a walk: each value
+      // moves by trend (fraction per step) plus up to ±noise of itself.
+      series: function (n, opts) {
+        opts = opts || {};
+        var value = opts.start == null ? 100 : opts.start;
+        var factor = Math.pow(10, opts.decimals || 0);
+        var out = [];
+        for (var i = 0; i < n; i++) {
+          out.push(Math.max(opts.min == null ? 0 : opts.min, Math.round(value * factor) / factor));
+          value = value * (1 + (opts.trend || 0)) * (1 + (random() * 2 - 1) * (opts.noise == null ? 0.08 : opts.noise));
+        }
+        return out;
+      },
+      // dates(n, {end?, step?: "day" | "week" | "month"}) — ISO dates
+      // (YYYY-MM-DD), oldest first, ending at end (default: today).
+      dates: function (n, opts) {
+        opts = opts || {};
+        var end = opts.end ? new Date(opts.end) : new Date();
+        var out = [];
+        for (var i = n - 1; i >= 0; i--) {
+          var d = new Date(end.getTime());
+          if (opts.step === "month") d.setMonth(d.getMonth() - i);
+          else d.setDate(d.getDate() - i * (opts.step === "week" ? 7 : 1));
+          out.push(d.toISOString().slice(0, 10));
+        }
+        return out;
+      },
+      // rows(n, spec) — n objects; each spec value is a function(i), a list
+      // to pick from, or a constant.
+      rows: function (n, spec) {
+        var out = [];
+        for (var i = 0; i < n; i++) {
+          var row = {};
+          for (var key in spec) {
+            var value = spec[key];
+            row[key] = typeof value === "function" ? value(i) : Array.isArray(value) ? pick(value) : value;
+          }
+          out.push(row);
+        }
+        return out;
+      }
+    };
+    return mock;
+  }
+
+  window.skipShell = { fmt: fmt };
+  window.skipChart = { bar: bar, line: line, donut: donut };
+  window.skipUI = { table: table, kpis: kpis, badge: badge, tabs: tabs, toast: toast };
+  window.skipStore = store;
+  window.skipMock = createMock(20261022);
+})();
+
+</script>
+<style>
+/*
+  EDITAR AQUI: cores da marca.
+  --accent: laranja/terracota principal. --accent-text: versão escura para texto.
+*/
+:root {
+  --accent: #c2410c;
+  --accent-text: #9a3412;
+  --accent-contrast: #ffffff;
+  --cream: #fdf8f0;
+  --forest: #14532d;
+  --forest-soft: #1f6b3b;
+  --bg: #fdf8f0;
+  --surface: #ffffff;
+  --text: #2a1d14;
+  --text-muted: #6b5a4c;
+  --border: #ecdfcc;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; margin: 0; }
+a { color: var(--accent-text); }
+img { max-width: 100%; display: block; }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(253, 248, 240, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s ease;
+}
+.site-header.scrolled { box-shadow: 0 6px 20px rgba(42, 29, 20, .08); }
+.nav-wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px; max-width: 1180px; margin: 0 auto; padding: 0 20px; gap: 16px;
+}
+/* EDITAR AQUI: nome da loja (logo) */
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.2rem;
+  color: var(--forest); text-decoration: none;
+}
+.logo-mark {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), #ea580c);
+  color: #fff; display: grid; place-items: center; font-size: 1.1rem;
+  box-shadow: 0 6px 14px rgba(194, 65, 12, .3);
+}
+.nav-links { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
+.nav-links a {
+  text-decoration: none; color: var(--text); font-weight: 500; font-size: .95rem;
+  position: relative; padding: 6px 0; transition: color .2s;
+}
+.nav-links a::after {
+  content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 0;
+  background: var(--accent); transition: width .25s ease;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--accent-text); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-cta { display: flex; align-items: center; gap: 12px; }
+.btn-whats {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--forest); color: #fff !important; text-decoration: none;
+  padding: 11px 18px; border-radius: 999px; font-weight: 600; font-size: .92rem;
+  transition: transform .2s, background .2s, box-shadow .2s;
+  box-shadow: 0 6px 16px rgba(20, 83, 45, .25);
+}
+.btn-whats:hover { background: var(--forest-soft); transform: translateY(-2px); }
+.btn-whats:focus-visible, .btn-ghost:focus-visible, .btn-primary:focus-visible,
+.nav-links a:focus-visible, .burger:focus-visible, .product-card button:focus-visible,
+.social a:focus-visible, .footer-links a:focus-visible {
+  outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 8px;
+}
+.burger {
+  display: none; background: none; border: 0; cursor: pointer; padding: 8px;
+  color: var(--forest);
+}
+.burger svg { width: 28px; height: 28px; }
+.mobile-menu {
+  display: none; position: fixed; top: 72px; left: 0; right: 0; background: var(--cream);
+  border-bottom: 1px solid var(--border); padding: 12px 20px 22px; z-index: 99;
+  box-shadow: 0 16px 30px rgba(42,29,20,.1);
+  transform: translateY(-8px); opacity: 0; transition: transform .3s, opacity .3s;
+}
+.mobile-menu.open { display: block; transform: translateY(0); opacity: 1; }
+.mobile-menu a {
+  display: block; padding: 14px 4px; color: var(--text); text-decoration: none;
+  font-weight: 600; border-bottom: 1px solid var(--border);
+}
+.mobile-menu .btn-whats { margin-top: 14px; width: 100%; justify-content: center; }
+
+/* ---------- Buttons ---------- */
+.btn-primary, .btn-ghost {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 26px; border-radius: 999px; font-weight: 600; font-size: 1rem;
+  text-decoration: none; cursor: pointer; border: 2px solid transparent;
+  transition: transform .2s, box-shadow .2s, background .2s, color .2s;
+  font-family: var(--font-body);
+}
+.btn-primary {
+  background: var(--accent); color: #fff;
+  box-shadow: 0 10px 22px rgba(194, 65, 12, .3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(194,65,12,.35); background: #b13a0a; }
+.btn-ghost {
+  background: transparent; color: var(--forest); border-color: var(--forest);
+}
+.btn-ghost:hover { background: var(--forest); color: #fff; transform: translateY(-2px); }
+.btn-small { padding: 10px 16px; font-size: .9rem; }
+.btn-full { width: 100%; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; min-height: 100vh; display: flex; align-items: center;
+  padding: 120px 20px 80px; overflow: hidden;
+  background:
+    linear-gradient(105deg, rgba(20,83,45,.92) 0%, rgba(20,83,45,.78) 45%, rgba(194,65,12,.55) 100%),
+    url("https://img.usecurling.com/p/1600/1000?q=cozy%20neighborhood%20shop%20interior&color=orange") center/cover no-repeat;
+  color: #fff;
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(253,186,116,.25), transparent 50%);
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative; max-width: 1180px; margin: 0 auto; width: 100%;
+  display: grid; gap: 40px; align-items: center;
+}
+@media (min-width: 900px) { .hero-inner { grid-template-columns: 1.1fr .9fr; } }
+.eyebrow-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3);
+  padding: 7px 14px; border-radius: 999px; font-size: .85rem; font-weight: 600;
+  backdrop-filter: blur(6px);
+}
+.dot-live {
+  width: 8px; height: 8px; border-radius: 50%; background: #4ade80;
+  box-shadow: 0 0 0 0 rgba(74,222,128,.7); animation: ping 2s infinite;
+}
+@keyframes ping {
+  0% { box-shadow: 0 0 0 0 rgba(74,222,128,.7); }
+  70% { box-shadow: 0 0 0 10px rgba(74,222,128,0); }
+  100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+}
+.hero h1 {
+  font-size: clamp(2.3rem, 5.4vw, 3.9rem); margin: 18px 0 16px; font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.hero h1 em { font-style: normal; color: #fdba74; }
+.hero p.lead { font-size: 1.12rem; color: rgba(255,255,255,.92); max-width: 540px; margin: 0 0 28px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero .btn-ghost { color: #fff; border-color: #fff; }
+.hero .btn-ghost:hover { background: #fff; color: var(--forest); }
+.hero-card {
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(12px); border-radius: 22px; padding: 26px;
+  box-shadow: 0 30px 60px rgba(0,0,0,.25);
+}
+.hero-card h3 { font-size: 1.25rem; margin-bottom: 4px; }
+.hero-card .muted-light { color: rgba(255,255,255,.8); font-size: .9rem; margin: 0 0 18px; }
+.status-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; border-top: 1px solid rgba(255,255,255,.2); font-size: .95rem;
+}
+.status-open { color: #bbf7d0; font-weight: 700; }
+.status-closed { color: #fecaca; font-weight: 700; }
+.hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.hero-badges span {
+  background: rgba(255,255,255,.18); padding: 6px 12px; border-radius: 999px; font-size: .82rem; font-weight: 600;
+}
+
+/* ---------- Features band ---------- */
+.features {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 34px 20px;
+}
+.features-grid {
+  max-width: 1180px; margin: 0 auto;
+  display: grid; gap: 18px; grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 900px) { .features-grid { grid-template-columns: repeat(4, 1fr); } }
+.feature {
+  display: flex; gap: 14px; align-items: center; padding: 16px; border-radius: 16px;
+  transition: background .25s, transform .25s;
+}
+.feature:hover { background: var(--cream); transform: translateY(-3px); }
+.feature-icon {
+  flex: 0 0 52px; height: 52px; border-radius: 14px;
+  background: linear-gradient(135deg, #ffedd5, #fed7aa);
+  color: var(--accent-text); display: grid; place-items: center;
+}
+.feature-icon svg { width: 26px; height: 26px; }
+.feature h4 { margin: 0; font-size: 1rem; font-weight: 700; }
+.feature p { margin: 2px 0 0; font-size: .86rem; color: var(--text-muted); }
+
+/* ---------- Sections ---------- */
+section.block { padding: 96px 20px; }
+.container { max-width: 1180px; margin: 0 auto; }
+.section-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+.section-head .eyebrow {
+  display: inline-block; background: #ffedd5; color: var(--accent-text);
+  padding: 6px 14px; border-radius: 999px; font-size: .8rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em; margin-bottom: 14px;
+}
+.section-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.6rem); margin-bottom: 12px; color: var(--forest); }
+.section-head p { color: var(--text-muted); margin: 0; font-size: 1.02rem; }
+
+/* Filter pills for products */
+.filter-row {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 36px;
+}
+.filter-pill {
+  border: 1.5px solid var(--border); background: var(--surface); color: var(--text);
+  padding: 9px 18px; border-radius: 999px; font-weight: 600; font-size: .9rem; cursor: pointer;
+  font-family: var(--font-body); transition: all .2s;
+}
+.filter-pill:hover { border-color: var(--accent); color: var(--accent-text); }
+.filter-pill.active { background: var(--forest); border-color: var(--forest); color: #fff; }
+
+/* ---------- Products ---------- */
+.products-grid {
+  display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.product-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.product-card:hover { transform: translateY(-6px); box-shadow: 0 22px 40px rgba(42,29,20,.12); }
+.product-img { position: relative; aspect-ratio: 4/3; overflow: hidden; background: #f5ead8; }
+.product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.product-card:hover .product-img img { transform: scale(1.06); }
+.product-tag {
+  position: absolute; top: 12px; left: 12px; background: #fff; color: var(--accent-text);
+  font-size: .75rem; font-weight: 700; padding: 5px 10px; border-radius: 999px;
+}
+.product-body { padding: 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.product-body h3 { font-size: 1.15rem; color: var(--text); }
+.product-body p { margin: 0; color: var(--text-muted); font-size: .92rem; flex: 1; }
+.price-row { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+.price { font-weight: 700; font-size: 1.2rem; color: var(--accent-text); }
+.price small { font-size: .75rem; color: var(--text-muted); font-weight: 500; display: block; }
+.btn-order {
+  background: var(--forest); color: #fff; border: 0; border-radius: 999px;
+  padding: 10px 16px; font-weight: 600; font-size: .88rem; cursor: pointer;
+  font-family: var(--font-body); display: inline-flex; align-items: center; gap: 6px;
+  transition: background .2s, transform .2s;
+}
+.btn-order:hover { background: var(--forest-soft); transform: translateY(-1px); }
+.products-foot { text-align: center; margin-top: 40px; }
+.products-foot p { color: var(--text-muted); font-size: .9rem; margin: 12px 0 0; }
+
+/* ---------- About ---------- */
+.about { background: var(--cream); }
+.about-grid { display: grid; gap: 48px; align-items: center; }
+@media (min-width: 900px) { .about-grid { grid-template-columns: 1fr 1fr; } }
+.about-photo {
+  position: relative; border-radius: 26px; overflow: hidden;
+  box-shadow: 0 30px 60px rgba(42,29,20,.18);
+}
+.about-photo img { width: 100%; height: 440px; object-fit: cover; }
+.about-photo figcaption {
+  position: absolute; left: 16px; bottom: 16px; right: 16px;
+  background: rgba(255,255,255,.95); padding: 14px 16px; border-radius: 14px;
+  font-size: .88rem; color: var(--text);
+}
+/* EDITAR AQUI: texto institucional da loja */
+.about-text h2 { font-size: clamp(1.9rem, 3.6vw, 2.5rem); color: var(--forest); margin-bottom: 16px; }
+.about-text p { color: var(--text-muted); font-size: 1.02rem; margin: 0 0 16px; }
+.about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+.stat {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px 12px; text-align: center;
+}
+.stat strong { display: block; font-family: var(--font-display); font-size: 1.8rem; color: var(--accent-text); }
+.stat span { font-size: .8rem; color: var(--text-muted); }
+
+/* ---------- Hours & Location ---------- */
+.visit-grid { display: grid; gap: 28px; }
+@media (min-width: 900px) { .visit-grid { grid-template-columns: 1fr 1.2fr; } }
+.visit-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 28px;
+}
+.visit-card h3 { font-size: 1.35rem; color: var(--forest); margin-bottom: 6px; }
+.visit-card > p.sub { color: var(--text-muted); font-size: .92rem; margin: 0 0 18px; }
+.hours-table { width: 100%; border-collapse: collapse; }
+.hours-table td { padding: 12px 0; border-bottom: 1px dashed var(--border); font-size: .97rem; }
+.hours-table td:last-child { text-align: right; font-weight: 600; }
+.hours-table tr.today td { color: var(--accent-text); }
+.today-pill {
+  display: inline-block; margin-left: 8px; background: #ffedd5; color: var(--accent-text);
+  font-size: .7rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; vertical-align: middle;
+}
+.address-line { display: flex; gap: 12px; align-items: flex-start; margin-top: 18px; color: var(--text); }
+.address-line svg { flex: 0 0 22px; color: var(--accent); margin-top: 2px; }
+/* Mapa estilizado placeholder (sem API real) */
+.map-placeholder {
+  position: relative; border-radius: 22px; overflow: hidden; min-height: 360px;
+  background:
+    linear-gradient(135deg, #e7f3e4 0%, #f7efe0 100%);
+  border: 1px solid var(--border);
+}
+.map-placeholder svg.streets { position: absolute; inset: 0; width: 100%; height: 100%; }
+.map-pin {
+  position: absolute; left: 50%; top: 46%; transform: translate(-50%, -100%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.map-pin .pin {
+  width: 46px; height: 46px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+  background: var(--accent); border: 3px solid #fff; box-shadow: 0 8px 18px rgba(194,65,12,.4);
+  display: grid; place-items: center;
+}
+.map-pin .pin span { transform: rotate(45deg); color: #fff; font-weight: 800; font-size: .9rem; }
+.map-label {
+  background: #fff; border-radius: 12px; padding: 8px 12px; font-size: .8rem; font-weight: 600;
+  box-shadow: 0 8px 18px rgba(42,29,20,.12); white-space: nowrap;
+}
+.map-caption {
+  position: absolute; left: 14px; bottom: 14px; right: 14px;
+  background: rgba(255,255,255,.94); border-radius: 14px; padding: 12px 14px; font-size: .85rem;
+}
+.map-caption strong { color: var(--forest); }
+
+/* ---------- Testimonials ---------- */
+.testimonials { background: var(--forest); color: #fff; }
+.testimonials .section-head h2 { color: #fff; }
+.testimonials .section-head p { color: rgba(255,255,255,.85); }
+.testimonials .section-head .eyebrow { background: rgba(255,255,255,.15); color: #fed7aa; }
+.testimonials-grid { display: grid; gap: 24px; grid-template-columns: 1fr; }
+@media (min-width: 800px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+.testimonial {
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+  border-radius: 22px; padding: 28px; display: flex; flex-direction: column; gap: 16px;
+  transition: transform .3s, background .3s;
+}
+.testimonial:hover { transform: translateY(-5px); background: rgba(255,255,255,.12); }
+.stars { color: #fbbf24; font-size: 1.1rem; letter-spacing: 2px; }
+.testimonial blockquote { margin: 0; font-size: 1rem; line-height: 1.65; color: rgba(255,255,255,.95); flex: 1; }
+.author { display: flex; align-items: center; gap: 12px; }
+.author img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #fdba74; }
+.author strong { display: block; font-size: .95rem; }
+.author span { font-size: .8rem; color: rgba(255,255,255,.75); }
+
+/* ---------- CTA ---------- */
+.cta {
+  padding: 96px 20px; background: var(--cream);
+}
+.cta-box {
+  max-width: 1000px; margin: 0 auto; border-radius: 30px; padding: 56px 32px; text-align: center;
+  background: linear-gradient(135deg, #c2410c 0%, #ea580c 55%, #f59e0b 100%);
+  color: #fff; box-shadow: 0 30px 60px rgba(194,65,12,.3); position: relative; overflow: hidden;
+}
+.cta-box::after {
+  content: ""; position: absolute; width: 320px; height: 320px; border-radius: 50%;
+  background: rgba(255,255,255,.1); right: -120px; top: -120px;
+}
+.cta-box h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); margin-bottom: 14px; color: #fff; position: relative; }
+.cta-box p { font-size: 1.05rem; max-width: 620px; margin: 0 auto 26px; color: rgba(255,255,255,.95); position: relative; }
+.demo-badge {
+  display: inline-block; background: rgba(255,255,255,.2); border: 1px solid rgba(255,255,255,.4);
+  padding: 6px 14px; border-radius: 999px; font-size: .8rem; font-weight: 700; margin-bottom: 18px; position: relative;
+}
+.cta .btn-whats-light {
+  display: inline-flex; align-items: center; gap: 10px; background: #fff; color: var(--accent-text);
+  text-decoration: none; padding: 16px 30px; border-radius: 999px; font-weight: 700; font-size: 1.05rem;
+  box-shadow: 0 12px 24px rgba(0,0,0,.18); transition: transform .2s; position: relative;
+}
+.cta .btn-whats-light:hover { transform: translateY(-3px); }
+.cta .btn-whats-light:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+.cta-note { font-size: .85rem; margin-top: 16px; color: rgba(255,255,255,.9); position: relative; }
+
+/* ---------- Footer ---------- */
+.site-footer { background: #1d140d; color: #e9dccb; padding: 64px 20px 28px; }
+.footer-grid { max-width: 1180px; margin: 0 auto; display: grid; gap: 36px; }
+@media (min-width: 800px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+.site-footer h4 { font-family: var(--font-display); color: #fff; font-size: 1.15rem; margin-bottom: 14px; }
+.site-footer p, .site-footer li { font-size: .92rem; color: #cbbba6; margin: 0 0 8px; }
+.site-footer ul { list-style: none; padding: 0; margin: 0; }
+.footer-links a { color: #e9dccb; text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: #fdba74; }
+.social { display: flex; gap: 12px; margin-top: 16px; }
+.social a {
+  width: 44px; height: 44px; border-radius: 14px; background: rgba(255,255,255,.08);
+  display: grid; place-items: center; color: #fff; transition: background .2s, transform .2s;
+}
+.social a:hover { background: var(--accent); transform: translateY(-3px); }
+.social svg { width: 20px; height: 20px; }
+.footer-bottom {
+  max-width: 1180px; margin: 44px auto 0; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.12);
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: .85rem; color: #a89782;
+}
+.footer-bottom a { color: #fdba74; text-decoration: none; }
+
+/* ---------- Floating WhatsApp ---------- */
+.float-whats {
+  position: fixed; right: 20px; bottom: 20px; z-index: 90;
+  width: 58px; height: 58px; border-radius: 50%; background: #25d366; color: #fff;
+  display: grid; place-items: center; box-shadow: 0 10px 24px rgba(37,211,102,.4);
+  transition: transform .2s; text-decoration: none;
+}
+.float-whats:hover { transform: scale(1.08); }
+.float-whats:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.float-whats svg { width: 30px; height: 30px; }
+
+/* ---------- Toast-like feedback for product order (shell toast) ---------- */
+
+/* ---------- Scroll reveal ---------- */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal.delay-1 { transition-delay: .1s; }
+.reveal.delay-2 { transition-delay: .2s; }
+.reveal.delay-3 { transition-delay: .3s; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .dot-live { animation: none; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .nav-links, .nav-cta .btn-whats { display: none; }
+  .burger { display: block; }
+  .hero { min-height: auto; padding-top: 110px; }
+}
+@media (max-width: 560px) {
+  .about-stats { grid-template-columns: 1fr 1fr 1fr; }
+  .section-head { margin-bottom: 36px; }
+  .hero-actions .btn-primary, .hero-actions .btn-ghost { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<!-- EDITAR AQUI: nome da loja e número de WhatsApp (substitua 5511999999999 pelo número real, formato DDI+DDD+número) -->
+<header class="site-header" id="siteHeader">
+  <div class="nav-wrap">
+    <a href="#inicio" class="logo" aria-label="Sua Loja Aqui - início">
+      <span class="logo-mark" aria-hidden="true">🏪</span>
+      <span>Sua Loja Aqui</span>
+    </a>
+    <nav aria-label="Navegação principal">
+      <ul class="nav-links">
+        <li><a href="#inicio" class="active">Início</a></li>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn-whats" href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20vi%20seu%20site%20e%20quero%20falar%20com%20voc%C3%AAs" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.1-3.4-8.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.9 9.9 0 0 1-1.5-5.2C2.1 6.4 6.5 2 12 2c2.6 0 5.1 1 7 2.9a9.8 9.8 0 0 1 2.9 7c0 5.5-4.4 9.9-9.9 9.9zm5.4-7.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1 3 .8 3.6.7.5-.1 1.8-.7 2-1.5.2-.7.2-1.3.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+    <button class="burger" id="burgerBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#inicio">Início</a>
+    <a href="#produtos">Produtos</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#contato">Contato</a>
+    <a class="btn-whats" href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20vi%20seu%20site%20e%20quero%20falar%20com%20voc%C3%AAs" target="_blank" rel="noopener">Falar no WhatsApp</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<!-- EDITAR AQUI: título, subtítulo e imagem de fundo da hero -->
+<section class="hero" id="inicio">
+  <div class="hero-inner">
+    <div class="reveal">
+      <span class="eyebrow-pill"><span class="dot-live" aria-hidden="true"></span> Aberto agora • Atendimento no WhatsApp</span>
+      <h1>Sua loja no bairro, <em>agora também na internet</em></h1>
+      <p class="lead">Veja nossos produtos, confira os horários e converse direto com a gente pelo WhatsApp. Atendimento próximo, do jeito que você já conhece. [Personalize: frase de apresentação da sua loja]</p>
+      <div class="hero-actions">
+        <a href="#produtos" class="btn-primary">Ver produtos</a>
+        <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20os%20produtos" class="btn-ghost" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      </div>
+      <div class="hero-badges">
+        <span>⭐ 4,9 no Google</span>
+        <span>🛵 Entrega no bairro</span>
+        <span>💳 Pix e cartão</span>
+      </div>
+    </div>
+    <div class="hero-card reveal delay-2" aria-label="Status de funcionamento">
+      <h3>Estamos abertos hoje</h3>
+      <p class="muted-light" id="heroHoursNote">Horário de hoje: 08h às 20h</p>
+      <div class="status-row"><span>Situação agora</span><span class="status-open" id="openStatus">Aberto</span></div>
+      <div class="status-row"><span>Segunda a sexta</span><span>08h às 20h</span></div>
+      <div class="status-row"><span>Sábado</span><span>08h às 18h</span></div>
+      <div class="status-row"><span>Domingo e feriados</span><span>09h às 13h</span></div>
+      <div class="hero-badges">
+        <span>📍 Centro • [Bairro]</span>
+        <span>🏷️ Ofertas da semana</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES BAND ============ -->
+<section class="features" aria-label="Nossos diferenciais">
+  <div class="features-grid">
+    <div class="feature reveal">
+      <div class="feature-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.7-.8L3 21l1.9-5.2A8.4 8.4 0 1 1 21 11.5z"/></svg>
+      </div>
+      <div>
+        <h4>Atendimento próximo</h4>
+        <p>Conversa de verdade, sem robô.</p>
+      </div>
+    </div>
+    <div class="feature reveal delay-1">
+      <div class="feature-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div>
+        <h4>Aberto todos os dias</h4>
+        <p>Inclusive feriados, pelo WhatsApp.</p>
+      </div>
+    </div>
+    <div class="feature reveal delay-2">
+      <div class="feature-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </div>
+      <div>
+        <h4>Entrega no bairro</h4>
+        <p>Receba em casa no mesmo dia.</p>
+      </div>
+    </div>
+    <div class="feature reveal delay-3">
+      <div class="feature-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      </div>
+      <div>
+        <h4>Pagamento facilitado</h4>
+        <p>Pix, cartão e parcelamento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUTOS ============ -->
+<!-- EDITAR AQUI: lista de produtos (nome, descrição, preço, imagem e categoria) no array PRODUCTS do script no final da página -->
+<section class="block" id="produtos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Nosso catálogo</span>
+      <h2>Nossos produtos</h2>
+      <p>Uma seleção dos itens mais procurados pelos vizinhos. Toque em "Pedir pelo WhatsApp" para reservar ou tirar dúvidas.</p>
+    </div>
+    <div class="filter-row reveal" role="group" aria-label="Filtrar produtos por categoria" id="filterRow">
+      <button type="button" class="filter-pill active" data-filter="todos">Todos</button>
+      <button type="button" class="filter-pill" data-filter="casa">Casa</button>
+      <button type="button" class="filter-pill" data-filter="escritorio">Escritório</button>
+      <button type="button" class="filter-pill" data-filter="presentes">Presentes</button>
+      <button type="button" class="filter-pill" data-filter="mercado">Mercado</button>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+    <div class="products-foot reveal">
+      <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20quero%20ver%20o%20cat%C3%A1logo%20completo" class="btn-ghost" target="_blank" rel="noopener">Ver catálogo completo no WhatsApp</a>
+      <p>Preços sujeitos a alteração. Valores de demonstração — [Personalize: preços reais da sua loja].</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOBRE ============ -->
+<!-- EDITAR AQUI: texto institucional e foto do estabelecimento (troque a URL da imagem pela foto real) -->
+<section class="block about" id="sobre">
+  <div class="container about-grid">
+    <div class="about-photo reveal">
+      <img src="https://img.usecurling.com/p/900/700?q=small%20shop%20owner%20smiling&color=orange" alt="Foto do estabelecimento [Personalize: foto real da fachada ou da equipe]">
+      <figcaption>
+        <strong>[Nome do proprietário]</strong> recebendo clientes desde [ano].<br>
+        <span style="color:#6b5a4c;">Foto ilustrativa — substitua pela foto real da loja.</span>
+      </figcaption>
+    </div>
+    <div class="about-text reveal delay-1">
+      <span class="eyebrow" style="display:inline-block;background:#ffedd5;color:#9a3412;padding:6px 14px;border-radius:999px;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;">Quem somos</span>
+      <h2>Sobre a loja</h2>
+      <p>Somos uma loja de bairro feita de gente que conhece a vizinhança. Há [X] anos atendemos as famílias da região com produtos escolhidos com cuidado, preços justos e uma conversa sempre atenciosa no balcão ou no WhatsApp.</p>
+      <p>Nossa missão é simples: facilitar a vida de quem mora por perto. Por isso, além da loja física, estamos online para você ver o que tem disponível, tirar dúvidas e pedir com praticidade. [Personalize: diferenciais e história da loja]</p>
+      <div class="about-stats">
+        <div class="stat"><strong>[X]+</strong><span>anos de bairro</span></div>
+        <div class="stat"><strong>[X]k</strong><span>clientes atendidos</span></div>
+        <div class="stat"><strong>4,9</strong><span>nota média</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HORÁRIO & LOCALIZAÇÃO ============ -->
+<!-- EDITAR AQUI: endereço, telefone e horários de funcionamento (tabela HOURS no script) -->
+<section class="block" id="contato">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Visite a gente</span>
+      <h2>Horário e localização</h2>
+      <p>Confira quando estamos abertos e como chegar até a loja. Os horários de hoje são destacados automaticamente.</p>
+    </div>
+    <div class="visit-grid">
+      <div class="visit-card reveal">
+        <h3>Horário de funcionamento</h3>
+        <p class="sub">Atualizado em [dd/mm/aaaa]. Em feriados, consulte pelo WhatsApp.</p>
+        <table class="hours-table" id="hoursTable" aria-label="Horários de funcionamento"></table>
+        <div class="address-line">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <strong>Rua [Nome da rua], 123 — [Bairro]</strong><br>
+            <span class="muted" style="color:#6b5a4c;font-size:.9rem;">[Cidade] - [UF] • CEP [00000-000]</span>
+          </div>
+        </div>
+        <div class="row" style="margin-top:22px;display:flex;flex-wrap:wrap;gap:12px;">
+          <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20qual%20o%20melhor%20hor%C3%A1rio%20para%20passar%20na%20loja%3F" class="btn-whats" target="_blank" rel="noopener">Falar no WhatsApp</a>
+          <button type="button" class="btn-ghost btn-small" id="copyAddressBtn">Copiar endereço</button>
+        </div>
+      </div>
+      <div class="map-placeholder reveal delay-1" role="img" aria-label="Mapa ilustrativo mostrando a localização da loja (placeholder)">
+        <svg class="streets" viewBox="0 0 600 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="600" height="420" fill="#eef5e8"/>
+          <rect x="60" y="40" width="130" height="90" rx="8" fill="#d8ead0"/>
+          <rect x="330" y="30" width="200" height="120" rx="8" fill="#d8ead0"/>
+          <rect x="420" y="250" width="140" height="130" rx="8" fill="#d8ead0"/>
+          <rect x="40" y="260" width="180" height="120" rx="8" fill="#d8ead0"/>
+          <path d="M0 200 Q 150 170 300 210 T 600 190" stroke="#fff" stroke-width="22" fill="none"/>
+          <path d="M280 0 L 300 420" stroke="#fff" stroke-width="18" fill="none"/>
+          <path d="M0 330 L 600 300" stroke="#fff" stroke-width="14" fill="none"/>
+          <path d="M120 0 L 90 420" stroke="#fff" stroke-width="12" fill="none"/>
+          <path d="M0 200 Q 150 170 300 210 T 600 190" stroke="#fdba74" stroke-width="3" stroke-dasharray="8 8" fill="none"/>
+        </svg>
+        <div class="map-pin" aria-hidden="true">
+          <div class="pin"><span>★</span></div>
+          <div class="map-label">Sua Loja Aqui</div>
+        </div>
+        <div class="map-caption">
+          <strong>Mapa ilustrativo.</strong> Substitua por um mapa real (Google Maps embed ou OpenStreetMap) ao publicar o site do cliente.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEPOIMENTOS ============ -->
+<!-- EDITAR AQUI: depoimentos reais (nome, texto e foto) -->
+<section class="block testimonials" id="depoimentos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Quem já comprou</span>
+      <h2>O que nossos clientes dizem</h2>
+      <p>Depoimentos de vizinhos que já compraram com a gente. [Personalize: depoimentos reais dos clientes]</p>
+    </div>
+    <div class="testimonials-grid">
+      <article class="testimonial reveal">
+        <div class="stars" aria-label="5 estrelas">★★★★★</div>
+        <blockquote>"Atendimento muito atencioso. Pedi pelo WhatsApp, em menos de uma hora já estava na minha porta. Virei cliente fiel!"</blockquote>
+        <div class="author">
+          <img src="https://img.usecurling.com/ppl/thumbnail?gender=female&seed=21" alt="Foto de Patrícia Lima">
+          <div><strong>Patrícia Lima</strong><span>Cliente há 2 anos</span></div>
+        </div>
+      </article>
+      <article class="testimonial reveal delay-1">
+        <div class="stars" aria-label="5 estrelas">★★★★★</div>
+        <blockquote>"Preço justo e produtos de qualidade. Dá para ver tudo pelo site antes de vir, o que economiza meu tempo na correria do dia."</blockquote>
+        <div class="author">
+          <img src="https://img.usecurling.com/ppl/thumbnail?gender=male&seed=33" alt="Foto de Carlos Mendes">
+          <div><strong>Carlos Mendes</strong><span>Morador do bairro</span></div>
+        </div>
+      </article>
+      <article class="testimonial reveal delay-2">
+        <div class="stars" aria-label="5 estrelas">★★★★★</div>
+        <blockquote>"Sempre tem alguém disposto a ajudar a escolher. Pagamento no Pix é rapidinho. Recomendo para todo mundo da rua."</blockquote>
+        <div class="author">
+          <img src="https://img.usecurling.com/ppl/thumbnail?gender=female&seed=57" alt="Foto de Juliana Ribeiro">
+          <div><strong>Juliana Ribeiro</strong><span>Cliente desde 2023</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<!-- EDITAR AQUI: texto e link do CTA final. Este é um site MODELO demonstrativo. -->
+<section class="cta" id="cta">
+  <div class="cta-box reveal">
+    <span class="demo-badge">Site modelo / demonstrativo</span>
+    <h2>Quer um site assim para sua loja?</h2>
+    <p>Este é um modelo de demonstração. Criamos sites completos para pequenos comércios do seu bairro, com catálogo, horários, mapa e botão de WhatsApp, prontos para o seu negócio.</p>
+    <a class="btn-whats-light" href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20vi%20o%20site%20modelo%20e%20quero%20um%20site%20para%20minha%20loja" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.1-3.4-8.3z"/></svg>
+      Quero um site assim
+    </a>
+    <p class="cta-note">Resposta em até 24 horas úteis. Sem compromisso.</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<!-- EDITAR AQUI: nome da loja, redes sociais, telefone, endereço e crédito do desenvolvedor -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <h4>Sua Loja Aqui</h4>
+      <p>Loja de bairro com atendimento próximo, produtos selecionados e o carinho de sempre. [Personalize: slogan da loja]</p>
+      <div class="social">
+        <a href="https://instagram.com/[usuario]" target="_blank" rel="noopener" aria-label="Instagram da loja">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href="https://facebook.com/[usuario]" target="_blank" rel="noopener" aria-label="Facebook da loja">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg>
+        </a>
+        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener" aria-label="WhatsApp da loja">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.1-3.4-8.3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <h4>Navegação</h4>
+      <ul class="footer-links">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <ul>
+        <li>📞 (11) 99999-9999</li>
+        <li>📍 Rua [Nome da rua], 123 — [Bairro]</li>
+        <li>🕒 Seg a sáb, 08h às 20h</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span id="yearNow">2025</span> Sua Loja Aqui. Todos os direitos reservados.</span>
+    <span>Site desenvolvido por <a href="https://seusite.com.br" target="_blank" rel="noopener">[seu nome]</a></span>
+  </div>
+</footer>
+
+<!-- Botão flutuante de WhatsApp -->
+<a class="float-whats" href="https://wa.me/5511999999999?text=Ol%C3%A1%21" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.1-3.4-8.3z"/></svg>
+</a>
+
+<script>
+/*
+  ============================================================
+  CONFIGURAÇÃO DA LOJA — edite aqui para adaptar a cada cliente
+  ============================================================
+*/
+// EDITAR AQUI: número de WhatsApp no formato DDI+DDD+número (ex.: 5511987654321)
+const WHATS_NUMBER = "5511999999999";
+
+// EDITAR AQUI: produtos. Categorias válidas: casa, escritorio, presentes, mercado
+const PRODUCTS = [
+  { name: "[Produto 1] Vaso Cerâmico Artesanal", desc: "Peça feita à mão, ideal para plantas e decoração de sala.", price: "R$ 00,00", cat: "casa", img: "https://img.usecurling.com/p/600/450?q=ceramic%20vase&color=orange", tag: "Mais vendido" },
+  { name: "[Produto 2] Caderno Pautado Premium", desc: "Capa dura, 200 folhas de papel de alta gramatura.", price: "R$ 00,00", cat: "escritorio", img: "https://img.usecurling.com/p/600/450?q=notebook%20stationery&color=orange", tag: "Novo" },
+  { name: "[Produto 3] Caneca Personalizada", desc: "Cerâmica resistente com impressão colorida de alta qualidade.", price: "R$ 00,00", cat: "presentes", img: "https://img.usecurling.com/p/600/450?q=coffee%20mug%20gift&color=orange", tag: "Presente" },
+  { name: "[Produto 4] Kit Café da Manhã", desc: "Seleção de produtos frescos e práticos para começar o dia.", price: "R$ 00,00", cat: "mercado", img: "https://img.usecurling.com/p/600/450?q=breakfast%20basket&color=orange", tag: "Kit" },
+  { name: "[Produto 5] Almofada Decorativa", desc: "Tecido macio e lavável, com acabamento costurado à mão.", price: "R$ 00,00", cat: "casa", img: "https://img.usecurling.com/p/600/450?q=decorative%20cushion&color=orange", tag: "Destaque" },
+  { name: "[Produto 6] Agenda Anual Planner", desc: "Organize sua rotina com visão semanal e espaço para metas.", price: "R$ 00,00", cat: "escritorio", img: "https://img.usecurling.com/p/600/450?q=planner%20agenda&color=orange", tag: "Organização" },
+  { name: "[Produto 7] Cesta de Presente", desc: "Montagem especial com laço e cartão personalizado.", price: "R$ 00,00", cat: "presentes", img: "https://img.usecurling.com/p/600/450?q=gift%20basket%20ribbon&color=orange", tag: "Especial" },
+  { name: "[Produto 8] Azeite Extra Virgem 500ml", desc: "Sabor suave e intenso, prensado a frio.", price: "R$ 00,00", cat: "mercado", img: "https://img.usecurling.com/p/600/450?q=olive%20oil%20bottle&color=orange", tag: "Mercearia" }
+];
+
+// EDITAR AQUI: horários de funcionamento. "closed" = fechado.
+const HOURS = [
+  { day: "Segunda-feira", dow: 1, open: "08:00", close: "20:00" },
+  { day: "Terça-feira", dow: 2, open: "08:00", close: "20:00" },
+  { day: "Quarta-feira", dow: 3, open: "08:00", close: "20:00" },
+  { day: "Quinta-feira", dow: 4, open: "08:00", close: "20:00" },
+  { day: "Sexta-feira", dow: 5, open: "08:00", close: "20:00" },
+  { day: "Sábado", dow: 6, open: "08:00", close: "18:00" },
+  { day: "Domingo", dow: 0, open: "09:00", close: "13:00" }
+];
+
+// EDITAR AQUI: endereço usado na função "copiar endereço"
+const ADDRESS_TEXT = "Rua [Nome da rua], 123 — [Bairro], [Cidade] - [UF], CEP [00000-000]";
+
+/* ============================================================
+   RENDERIZAÇÃO DOS PRODUTOS
+   ============================================================ */
+function whatsProductLink(productName) {
+  const msg = `Olá! Tenho interesse no produto: ${productName}. Podem me passar mais informações?`;
+  return `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(msg)}`;
+}
+
+function renderProducts(filter = "todos") {
+  const grid = document.getElementById("productsGrid");
+  const list = filter === "todos" ? PRODUCTS : PRODUCTS.filter(p => p.cat === filter);
+  grid.innerHTML = list.map(p => `
+    <article class="product-card reveal">
+      <div class="product-img">
+        <img src="${p.img}" alt="${p.name} - [Personalize: foto real do produto]" loading="lazy">
+        <span class="product-tag">${p.tag}</span>
+      </div>
+      <div class="product-body">
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+        <div class="price-row">
+          <span class="price">${p.price}<small>preço por unidade</small></span>
+          <button class="btn-order" data-whats="${whatsProductLink(p.name)}">Pedir pelo WhatsApp</button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+
+  grid.querySelectorAll(".btn-order").forEach(btn => {
+    btn.addEventListener("click", () => {
+      window.open(btn.dataset.whats, "_blank", "noopener");
+      window.skipUI && window.skipUI.toast("Abrindo o WhatsApp com o seu pedido…", { type: "success" });
+    });
+  });
+  observeReveals(grid);
+}
+
+/* ============================================================
+   HORÁRIOS E STATUS "ABERTO AGORA"
+   ============================================================ */
+function toMinutes(hhmm) {
+  const [h, m] = hhmm.split(":").map(Number);
+  return h * 60 + m;
+}
+
+function renderHours() {
+  const table = document.getElementById("hoursTable");
+  const today = new Date().getDay();
+  const order = [1, 2, 3, 4, 5, 6, 0];
+  const rows = order.map(dow => {
+    const h = HOURS.find(x => x.dow === dow);
+    const isToday = dow === today;
+    return `<tr class="${isToday ? "today" : ""}">
+      <td>${h.day}${isToday ? '<span class="today-pill">Hoje</span>' : ""}</td>
+      <td>${h.open} às ${h.close}</td>
+    </tr>`;
+  }).join("");
+  table.innerHTML = `<tbody>${rows}</tbody>`;
+}
+
+function updateOpenStatus() {
+  const now = new Date();
+  const today = HOURS.find(h => h.dow === now.getDay());
+  const minutes = now.getHours() * 60 + now.getMinutes();
+  const statusEl = document.getElementById("openStatus");
+  const noteEl = document.getElementById("heroHoursNote");
+  const isOpen = today && minutes >= toMinutes(today.open) && minutes < toMinutes(today.close);
+  if (isOpen) {
+    statusEl.textContent = "Aberto";
+    statusEl.className = "status-open";
+  } else {
+    statusEl.textContent = "Fechado agora";
+    statusEl.className = "status-closed";
+  }
+  if (today) noteEl.textContent = `Horário de hoje: ${today.open} às ${today.close}`;
+}
+
+/* ============================================================
+   MENU MOBILE, HEADER E ANIMAÇÕES
+   ============================================================ */
+function setupMobileMenu() {
+  const burger = document.getElementById("burgerBtn");
+  const menu = document.getElementById("mobileMenu");
+  burger.addEventListener("click", () => {
+    const open = menu.classList.toggle("open");
+    burger.setAttribute("aria-expanded", String(open));
+    burger.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+  });
+  menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+    menu.classList.remove("open");
+    burger.setAttribute("aria-expanded", "false");
+  }));
+}
+
+function setupHeaderShadow() {
+  const header = document.getElementById("siteHeader");
+  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 10);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+}
+
+function setupActiveLinks() {
+  const links = document.querySelectorAll(".nav-links a");
+  const sections = ["inicio", "produtos", "sobre", "contato"].map(id => document.getElementById(id));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.toggle("active", l.getAttribute("href") === "#" + e.target.id));
+      }
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  sections.forEach(s => s && io.observe(s));
+}
+
+let revealObserver = null;
+function observeReveals(root = document) {
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+  }
+  root.querySelectorAll(".reveal:not(.visible)").forEach(el => revealObserver.observe(el));
+}
+
+/* ============================================================
+   FILTROS, COPIAR ENDEREÇO E EXTRAS
+   ============================================================ */
+function setupFilters() {
+  const pills = document.querySelectorAll(".filter-pill");
+  pills.forEach(pill => pill.addEventListener("click", () => {
+    pills.forEach(p => p.classList.remove("active"));
+    pill.classList.add("active");
+    renderProducts(pill.dataset.filter);
+  }));
+}
+
+function setupCopyAddress() {
+  const btn = document.getElementById("copyAddressBtn");
+  btn.addEventListener("click", () => {
+    const done = () => window.skipUI && window.skipUI.toast("Endereço copiado para a área de transferência.", { type: "success" });
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(ADDRESS_TEXT).then(done).catch(done);
+    } else {
+      done();
+    }
+  });
+}
+
+function setupYear() {
+  document.getElementById("yearNow").textContent = new Date().getFullYear();
+}
+
+/* Fecha o menu ao rolar em telas pequenas (evita menu aberto ao navegar) */
+function setupSmoothAnchors() {
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener("click", () => {
+      const menu = document.getElementById("mobileMenu");
+      menu.classList.remove("open");
+    });
+  });
+}
+
+/* ============================================================
+   INICIALIZAÇÃO
+   ============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  setupMobileMenu();
+  setupHeaderShadow();
+  setupActiveLinks();
+  setupFilters();
+  setupCopyAddress();
+  setupYear();
+  setupSmoothAnchors();
+  renderProducts();
+  renderHours();
+  updateOpenStatus();
+  setInterval(updateOpenStatus, 60000);
+  observeReveals();
+});
+</script>
+</body>
+</html>
